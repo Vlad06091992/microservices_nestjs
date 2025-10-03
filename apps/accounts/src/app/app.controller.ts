@@ -1,14 +1,18 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { IUser } from '@org/interfaces';
+import { UsersRepository } from '../users/repositories/user.repository';
 
-const User:IUser = {
-  name:"Vlad"
-}
+// const User:IUser = {
+//   name:"Vlad"
+// }
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+
+
+  constructor(
+    private readonly appService: AppService
+  ) {}
 
   @Get()
   getData() {
