@@ -1,11 +1,11 @@
-import { Document } from 'mongoose';
+import mongoose, { Document,Model, Types  } from 'mongoose';
 import { IUser, UserRole } from '@org/interfaces';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema()
 export class User extends Document implements IUser {
-  @Prop()
-  _id:string
+  @Prop({ type: Types.ObjectId, default: () => new Types.ObjectId() })
+  _id: Types.ObjectId;
   @Prop()
   displayName?: string;
   @Prop({required: true})

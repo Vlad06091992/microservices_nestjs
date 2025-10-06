@@ -1,15 +1,15 @@
 import { IUser, UserRole } from '@org/interfaces';
-import { genSalt, hash, compare, compareSync } from 'bcrypt';
+import { compare, genSalt, hash } from 'bcrypt';
+import { ObjectId, Types } from 'mongoose';
 
 export class UserEntity implements IUser {
-  _id?: string;
+  _id: Types.ObjectId;
   email: string;
   displayName?: string;
   passwordHash: string;
   role: UserRole;
 
   constructor(user: IUser) {
-    this._id = user._id;
     this.email = user.email;
     this.displayName = user.displayName;
     this.role = user.role;
@@ -22,7 +22,7 @@ export class UserEntity implements IUser {
   }
 
   public validatePassword(password: string) {
-    const hashedPassword = this.passwordHash
+    const hashedPassword = this.passwordHash;
     return compare(password, hashedPassword);
   }
 }
