@@ -6,7 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { getJWTConfig } from '../../configs/jwt.config';
 
 @Module({
-  imports:[UsersModule,    JwtModule.register(getJWTConfig()),],
+  imports:[JwtModule.registerAsync(getJWTConfig()),UsersModule],
   controllers: [AuthController],
   providers: [AuthService],
 })
