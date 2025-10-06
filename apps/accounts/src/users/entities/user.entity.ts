@@ -2,7 +2,7 @@ import { IUser, UserRole } from '@org/interfaces';
 import { genSalt, hash, compare, compareSync } from 'bcrypt';
 
 export class UserEntity implements IUser {
-  _id: string;
+  _id?: string;
   email: string;
   displayName?: string;
   passwordHash: string;
@@ -21,7 +21,8 @@ export class UserEntity implements IUser {
     return this;
   }
 
-  public validatePassword(password: string, hashedPassword: string) {
+  public validatePassword(password: string) {
+    const hashedPassword = this.passwordHash
     return compare(password, hashedPassword);
   }
 }
