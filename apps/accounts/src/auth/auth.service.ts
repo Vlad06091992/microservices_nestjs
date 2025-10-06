@@ -6,10 +6,14 @@ import { UsersRepository } from '../users/repositories/user.repository';
 import { User } from '../users/models/user.models';
 import { UserEntity } from '../users/entities/user.entity';
 import { UserRole } from '@org/interfaces';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(@Inject() private readonly userRepo: UsersRepository) {}
+  constructor(
+    @Inject() private readonly userRepo: UsersRepository,
+    @Inject() private jwtService: JwtService
+    ) {}
 
   async register(dto: RegisterDTO) {
     const { displayName, email, password } = dto;
@@ -43,7 +47,9 @@ export class AuthService {
 
   }
 
-  login(dto: RegisterDTO) {
-    return 'This action adds a new auth';
+  async login(id: string) {
+    return {
+      access_token: await this.jwtService.signAsync({id}),
+    }
   }
 }
