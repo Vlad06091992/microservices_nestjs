@@ -1,16 +1,16 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  Inject,
-} from '@nestjs/common';
+import { Body, Controller, Inject, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+
+export class LoginDTO {
+  email: string;
+  password: string;
+}
+
+
+export class RegisterDTO extends LoginDTO {
+  displayName?: string;
+}
+
 
 @Controller('/auth')
 export class AuthController {
@@ -30,13 +30,4 @@ export class AuthController {
   }
 }
 
-export class LoginDTO{
-  email: string;
-  password: string;
-}
-
-
-export class RegisterDTO extends LoginDTO {
-  displayName?: string;
-}
 
