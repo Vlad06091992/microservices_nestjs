@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@org/interfaces": ["libs/interfaces/src/index.ts"]
+      "@org/contracts": ["libs/contracts/src/index.ts"],
+      "@org/interfaces": ["libs/interfaces/src/index.ts"],
+      "@org/libs": ["libs/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
