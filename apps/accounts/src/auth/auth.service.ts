@@ -1,10 +1,10 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import { RegisterDTO } from './auth.controller';
 import { UsersRepository } from '../users/repositories/user.repository';
 import { UserEntity } from '../users/entities/user.entity';
 import { UserRole } from '@org/interfaces';
 import { JwtService } from '@nestjs/jwt';
 import { Types } from 'mongoose';
+import { AccountRegister } from '@org/contracts';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +13,7 @@ export class AuthService {
     @Inject() private jwtService: JwtService
   ) {}
 
-  async register(dto: RegisterDTO) {
+  async register(dto: AccountRegister.Request):Promise<AccountRegister.Response> {
     const { displayName, email, password } = dto;
     const oldUser = await this.userRepo.findUser(email);
     if (oldUser) {
