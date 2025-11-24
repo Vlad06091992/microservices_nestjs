@@ -11,7 +11,7 @@
 [Click here to finish setting up your workspace!](https://cloud.nx.app/connect/RWRj0ywqrR)
 
 
-## Run tasks
+## Run tasks(accounts)
 
 To run the dev server for your app, use:
 
@@ -31,6 +31,26 @@ To see all available targets to run for a project, run:
 npx nx show project accounts
 ```
 
+## Run tasks(api)
+
+To run the dev server for your app, use:
+
+```sh
+npx nx serve api
+```
+
+To create a production bundle:
+
+```sh
+npx nx build api
+```
+
+To see all available targets to run for a project, run:
+
+```sh
+npx nx show project api
+```
+
 These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
 
 [More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
@@ -45,6 +65,12 @@ To generate a new application, use:
 
 ```sh
 npx nx g @nx/nest:app demo
+```
+
+To generate a new app in custom folder, use:
+
+```sh
+npx nx g @nx/nest:app myfolder/myapp
 ```
 
 To generate a new library, use:
