@@ -21,6 +21,7 @@ export class AuthController {
     @Body() dto: AccountLogin.Request
   ): Promise<AccountLogin.Response> {
     const { email, password } = dto;
+    console.log(email, password);
     const { id } = await this.authService.validateUser(email, password);
     return await this.authService.login(id);
   }

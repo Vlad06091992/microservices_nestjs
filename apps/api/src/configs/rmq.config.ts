@@ -13,7 +13,6 @@ export const getRMQConfig = (): IRMQServiceAsyncOptions => {
             password: configService.get('AMQP_PASSWORD') ?? '',
           },
         ],
-        queueName: configService.get('AMQP_QUEUE_NAME') ?? '',
         prefetchCount: 32,
         serviceName: 'accounts',
       };
