@@ -9,6 +9,7 @@ export class UsersRepository {
   constructor(@InjectModel(User.name) private readonly userModel:Model<User>) {
   }
 
+  //пример взаимодействия Entity и Model в mongoDB
   async createUser(user: UserEntity) {
     const newUser = new this.userModel(user)
     return await newUser.save();

@@ -1,7 +1,8 @@
 import { IUser, UserRole } from '@org/interfaces';
 import { compare, genSalt, hash } from 'bcrypt';
-import { ObjectId, Types } from 'mongoose';
+import { Types } from 'mongoose';
 
+// Entity — это конкретный экземпляр документа, который Model создаёт, находит и которым управляет.
 export class UserEntity implements IUser {
   _id: Types.ObjectId;
   email: string;
