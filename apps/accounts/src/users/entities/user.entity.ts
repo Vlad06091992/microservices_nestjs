@@ -1,4 +1,4 @@
-import { IUser, UserRole } from '@org/interfaces';
+import { IUser, IUserCourses, UserRole } from '@org/interfaces';
 import { compare, genSalt, hash } from 'bcrypt';
 import { Types } from 'mongoose';
 
@@ -9,12 +9,14 @@ export class UserEntity implements IUser {
   displayName?: string;
   passwordHash: string;
   role: UserRole;
+  courses?: IUserCourses[] ;
 
   constructor(user: IUser) {
     this.email = user.email;
     this.displayName = user.displayName;
     this.role = user.role;
     this.passwordHash = user.passwordHash;
+    this.courses = user.courses;
   }
 
   public async setPassword(password: string) {
