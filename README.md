@@ -10,6 +10,13 @@
 
 [Click here to finish setting up your workspace!](https://cloud.nx.app/connect/RWRj0ywqrR)
 
+## Local monitoring RabbitMQ
+
+address http://localhost:15672
+login - guest
+password - guest
+
+
 
 ## Run tasks(accounts)
 
@@ -54,6 +61,16 @@ npx nx show project api
 These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
 
 [More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+
+
+## Run all projects tasks(api,accounts)
+
+To run the dev server for your apps, use:
+
+```sh
+npx nx run-many -t serve --all
+```
+
 
 ## Add new projects
 
