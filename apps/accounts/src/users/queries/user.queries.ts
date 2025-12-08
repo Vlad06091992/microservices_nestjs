@@ -1,7 +1,8 @@
 import { Body, Controller } from '@nestjs/common';
 import { RMQRoute, RMQValidate } from 'nestjs-rmq';
-import { AccountGetCoursesInfo, AccountGetUserInfo } from '@org/contracts';
+import { AccountGetUserInfo } from '@org/contracts';
 import { UsersRepository } from '../repositories/user.repository';
+import { UserEntity } from '../entities/user.entity';
 
 @Controller()
 export class UsersQueries {
@@ -9,17 +10,12 @@ export class UsersQueries {
 
   @RMQValidate()
   @RMQRoute(AccountGetUserInfo.topic)
-  findUser(
+  async findUser(
     @Body() { userId }: AccountGetUserInfo.Request
   ): Promise<AccountGetUserInfo.Response> {
-    return this.usersRepository.findUserById(userId);
-  }
-
-  @RMQValidate()
-  @RMQRoute(AccountGetUserInfo.topic)
-  findAccounts(
-    @Body() { userId }: AccountGetUserInfo.Request
-  ): Promise<AccountGetCoursesInfo.Response> {
-    return this.usersRepository.findCoursesByUserId(userId);
+    const { user } = await this.usersRepository.findUserById(userId);
+    const userEntity = new UserEntity(user);
+    const profile = userEntity.getPublicProfile();
+    return { profile };
   }
 }

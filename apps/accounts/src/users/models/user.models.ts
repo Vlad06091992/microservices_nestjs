@@ -1,7 +1,6 @@
-import mongoose, { Document, Model, Types } from 'mongoose';
+import { Document, Types } from 'mongoose';
 import { IUser, IUserCourses, PurchaseState, UserRole } from '@org/interfaces';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { findAllNodeModules } from '@nx/webpack/src/utils/fs';
 
 //код для создания схемы и модели в репозитории
 // Model — это статический интерфейс для работы с коллекцией
@@ -10,7 +9,7 @@ import { findAllNodeModules } from '@nx/webpack/src/utils/fs';
 export class UserCourses extends Document implements IUserCourses {
   @Prop({ type: Types.ObjectId, default: () => new Types.ObjectId() })
   _id: Types.ObjectId;
-  @Prop({ required: true })
+  @Prop({ required: true, type:String })
   purchaseState: PurchaseState;
   @Prop({ type: Types.ObjectId, required: true })
   courseId: Types.ObjectId;

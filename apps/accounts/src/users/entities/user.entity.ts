@@ -12,6 +12,7 @@ export class UserEntity implements IUser {
   courses?: IUserCourses[] ;
 
   constructor(user: IUser) {
+    this._id = user._id;
     this.email = user.email;
     this.displayName = user.displayName;
     this.role = user.role;
@@ -27,5 +28,18 @@ export class UserEntity implements IUser {
   public validatePassword(password: string) {
     const hashedPassword = this.passwordHash;
     return compare(password, hashedPassword);
+  }
+
+  public updateProfile(displayName: string) {
+    this.displayName = displayName;
+    return this;
+  }
+
+  public getPublicProfile() {
+    return {
+      email: this.email,
+      role: this.role,
+      displayName: this.displayName,
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { IsEmail, IsString } from 'class-validator';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { IUser } from '@org/interfaces';
-// import { IUser } from '@org/interfaces';
 
 export namespace AccountGetUserInfo {
   //            сервис.название.тип_команды
@@ -8,11 +8,11 @@ export namespace AccountGetUserInfo {
 
   export class Request {
 
-    @IsEmail()
+    @IsString()
     userId:string
   }
   export class Response {
-    user:Omit<IUser, 'passwordHash'>;
+    profile:Omit<IUser, 'passwordHash'>;
   }
 }
 
