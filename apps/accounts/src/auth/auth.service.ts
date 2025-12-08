@@ -33,7 +33,6 @@ export class AuthService {
 
   async validateUser(email: string, password: string) {
     const user = await this.userRepo.findUser(email);
-    console.log('user',user);
     if (!user) {
       throw new UnauthorizedException('Incorrect login or password');
     }

@@ -8,7 +8,6 @@ import { UserEntity } from '../entities/user.entity';
 @Controller()
 export class UsersCommands {
   constructor(
-    // @Inject() private readonly authService: AuthService
     @Inject() private readonly userRepo: UsersRepository
   ) {}
 
