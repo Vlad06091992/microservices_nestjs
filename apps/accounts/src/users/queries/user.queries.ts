@@ -14,7 +14,9 @@ export class UsersQueries {
     @Body() { userId }: AccountGetUserInfo.Request
   ): Promise<AccountGetUserInfo.Response> {
     const { user } = await this.usersRepository.findUserById(userId);
+    //пример работы с Entity(создание из данных в БД)
     const userEntity = new UserEntity(user);
+    //использование функционала Entity
     const profile = userEntity.getPublicProfile();
     return { profile };
   }

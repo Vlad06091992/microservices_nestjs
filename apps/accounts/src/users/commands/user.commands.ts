@@ -18,14 +18,18 @@ export class UsersCommands {
     @Body() { user, userId }: AccountUpdateUserProfile.Request
   ): Promise<boolean> {
     try {
-      const {user:existedUser} = await this.userRepo.findUserById(userId);
+      const { user: existedUser } = await this.userRepo.findUserById(userId);
 
       if (!existedUser) {
         throw new NotFoundException('User does not exist');
       }
-      const userEntity = new UserEntity(existedUser).updateProfile(user.displayName);
+      //пример работы с Entity(создание из данных в БД)
+      const userEntity = new UserEntity(existedUser);
+      // пример работы с Entity
+      userEntity.updateProfile(user.displayName);
+
       await this.userRepo.updateUser(userEntity);
-      return true
+      return true;
     } catch (e) {
       console.log('ERROR', e);
     }
