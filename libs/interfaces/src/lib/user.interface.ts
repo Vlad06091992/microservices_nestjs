@@ -6,15 +6,16 @@ export enum UserRole {
 }
 
 export enum PurchaseState {
-  Waiting = 'Waiting',
+  Started = 'Started',
+  WaitingForPayment = 'WaitingForPayment',
   Purchased = 'Purchased',
   Canceled = 'Canceled',
-  WaitingForPayment = 'WaitingForPayment',
 }
 
 export interface IUserCourses {
   _id?: mongoose.Types.ObjectId;
-  courseId?: mongoose.Types.ObjectId;
+  // courseId?: mongoose.Types.ObjectId;
+  courseId?: string;
   purchaseState:PurchaseState
 }
 

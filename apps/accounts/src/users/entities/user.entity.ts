@@ -1,6 +1,7 @@
-import { IUser, IUserCourses, UserRole } from '@org/interfaces';
+import { IUser, IUserCourses, PurchaseState, UserRole } from '@org/interfaces';
 import { compare, genSalt, hash } from 'bcrypt';
 import { Types } from 'mongoose';
+import { ObjectId } from 'mongodb';
 
 // Entity — это конкретный экземпляр документа, который Model создаёт, находит и которым управляет.
 export class UserEntity implements IUser {
@@ -9,7 +10,7 @@ export class UserEntity implements IUser {
   displayName?: string;
   passwordHash: string;
   role: UserRole;
-  courses?: IUserCourses[] ;
+  courses?: IUserCourses[];
 
   constructor(user: IUser) {
     this._id = user._id;
@@ -18,6 +19,33 @@ export class UserEntity implements IUser {
     this.role = user.role;
     this.passwordHash = user.passwordHash;
     this.courses = user.courses;
+  }
+
+  public async addCourse(courseId: string) {
+    const isExist = this.courses.find((c) => c.courseId === courseId);
+    if (isExist) {
+      throw new Error('Course already exists');
+    }
+
+    this.courses.push({
+      courseId,
+      purchaseState: PurchaseState.Started,
+    });
+  }
+
+  public deleteCourse(courseId: string) {
+    this.courses = this.courses.filter((el) => el.courseId !== courseId);
+  }
+
+  public updateCourseStaus(courseId: string, status: PurchaseState) {
+    this.courses.map((c) => {
+      if (c.courseId === courseId) {
+        c.purchaseState = status;
+        return c;
+      }
+
+      return c;
+    });
   }
 
   public async setPassword(password: string) {
@@ -40,6 +68,6 @@ export class UserEntity implements IUser {
       email: this.email,
       role: this.role,
       displayName: this.displayName,
-    }
+    };
   }
 }
