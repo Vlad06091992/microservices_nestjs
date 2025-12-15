@@ -3,6 +3,7 @@ import { UserEntity } from '../entities/user.entity';
 import { CoursesGetCourse, PaymentGenerateLink } from '@org/contracts';
 import { PurchaseState } from '@org/interfaces';
 
+//реализация конкретного шага исходя из общего шаблона состояний
 export class BuyCourseStepStarted extends BuyCourseSagaState {
   public async pay(): Promise<{ paymentLink: string; user: UserEntity }> {
     const { course } = await this.saga.rmqService.send<

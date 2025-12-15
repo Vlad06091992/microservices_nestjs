@@ -1,6 +1,7 @@
 import { BuyCourseSaga } from './buy-course.saga';
 import { UserEntity } from '../entities/user.entity';
 
+//шаблон для создания состояния саги
 export abstract class BuyCourseSagaState {
   public saga: BuyCourseSaga;
 
