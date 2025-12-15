@@ -1,7 +1,7 @@
 import { BuyCourseSaga } from './buy-course.saga';
 import { UserEntity } from '../entities/user.entity';
 
-export abstract class BuyCourseState {
+export abstract class BuyCourseSagaState {
   public saga: BuyCourseSaga;
 
   public setContext(saga: BuyCourseSaga) {
