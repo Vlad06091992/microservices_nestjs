@@ -1,9 +1,14 @@
 import { Body, Controller, Inject, NotFoundException } from '@nestjs/common';
 import { AuthService } from '../../auth/auth.service';
 import { RMQRoute, RMQValidate } from 'nestjs-rmq';
-import { AccountUpdateUserProfile } from '@org/contracts';
+import {
+  AccountByCourse,
+  AccountCheckPayment,
+  AccountUpdateUserProfile,
+} from '@org/contracts';
 import { UsersRepository } from '../repositories/user.repository';
 import { UserEntity } from '../entities/user.entity';
+import { PurchaseState } from '@org/interfaces';
 
 @Controller()
 export class UsersCommands {
@@ -33,5 +38,28 @@ export class UsersCommands {
     } catch (e) {
       console.log('ERROR', e);
     }
+  }
+
+  @RMQValidate()
+  @RMQRoute(AccountByCourse.topic)
+  async buyCourse(
+    @Body() { userId, courseId }: AccountByCourse.Request
+  ): Promise<AccountByCourse.Response> {
+    const {user} = await this.userRepo.findUserById(userId);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    const userEntity = new UserEntity(user);
+
+    return { paymentUrl: 'url' };
+  }
+
+  @RMQValidate()
+  @RMQRoute(AccountCheckPayment.topic)
+  async checkPayment(
+    @Body() { userId, courseId }: AccountCheckPayment.Request
+  ): Promise<AccountCheckPayment.Response> {
+    return { status: PurchaseState.Purchased };
   }
 }

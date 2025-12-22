@@ -63,17 +63,9 @@ export class UserEntity implements IUser {
     });
   }
 
-
-  // public updateCourseStaus(courseId: string, status: PurchaseState) {
-  //   this.courses.map((c) => {
-  //     if (c.courseId === courseId) {
-  //       c.purchaseState = status;
-  //       return c;
-  //     }
-  //
-  //     return c;
-  //   });
-  // }
+  public getUserCourses() {
+    return this.courses;
+  }
 
   public async setPassword(password: string) {
     this.passwordHash = await hash(password, await genSalt(10));
