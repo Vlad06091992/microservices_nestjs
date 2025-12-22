@@ -12,7 +12,7 @@ export class UserCourses extends Document implements IUserCourses {
   @Prop({ required: true, type:String })
   purchaseState: PurchaseState;
   @Prop({ type: Types.ObjectId, required: true })
-  courseId: Types.ObjectId;
+  courseId: string;
 }
 
 export const UserCoursesSchema = SchemaFactory.createForClass(UserCourses);

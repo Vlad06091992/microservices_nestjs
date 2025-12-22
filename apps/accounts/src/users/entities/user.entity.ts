@@ -37,16 +37,43 @@ export class UserEntity implements IUser {
     this.courses = this.courses.filter((el) => el.courseId !== courseId);
   }
 
-  public updateCourseStaus(courseId: string, status: PurchaseState) {
+
+  public setCourseStaus(courseId: string, status: PurchaseState) {
+
+    const isExistCourse = this.courses.find((course) => course.courseId === courseId);
+    if (!isExistCourse) {
+      this.courses.push({
+        courseId,
+        purchaseState: PurchaseState.Started,
+      })
+      return this;
+    }
+
+    if (status === PurchaseState.Canceled) {
+      this.courses = this.courses.filter((course) => course.courseId !== courseId);
+      return this;
+    }
+
     this.courses.map((c) => {
       if (c.courseId === courseId) {
         c.purchaseState = status;
-        return c;
       }
 
       return c;
     });
   }
+
+
+  // public updateCourseStaus(courseId: string, status: PurchaseState) {
+  //   this.courses.map((c) => {
+  //     if (c.courseId === courseId) {
+  //       c.purchaseState = status;
+  //       return c;
+  //     }
+  //
+  //     return c;
+  //   });
+  // }
 
   public async setPassword(password: string) {
     this.passwordHash = await hash(password, await genSalt(10));

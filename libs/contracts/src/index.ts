@@ -5,3 +5,6 @@ export * from './lib/accounts/account_get_courses_info';
 export * from './lib/accounts/account_update_profile';
 export * from './lib/courses/courses_get_courses';
 export * from './lib/payment/payment_generate_link';
+export * from './lib/payment/payment_check';
+export * from './lib/accounts/account_buy_course';
+export * from './lib/accounts/account_check_payment';

@@ -19,6 +19,7 @@ export class UsersCommands {
     try {
       const { user: existedUser } = await this.userRepo.findUserById(userId);
 
+
       if (!existedUser) {
         throw new NotFoundException('User does not exist');
       }
