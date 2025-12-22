@@ -1,19 +1,19 @@
 import { IsString } from 'class-validator';
-import { PurchaseState } from '@org/interfaces';
+import { PaymentStatus } from '../payment/payment_check';
 
 export namespace AccountCheckPayment {
   //            сервис.название.тип_команды
-  export const topic = 'account.check-payment.command'
+  export const topic = 'account.check-payment.command';
 
   export class Request {
     @IsString()
-    userId:string
+    userId: string;
 
     @IsString()
-    courseId:string
+    courseId: string;
   }
   export class Response {
-    status:PurchaseState;
+    status: PaymentStatus;
   }
 }
 

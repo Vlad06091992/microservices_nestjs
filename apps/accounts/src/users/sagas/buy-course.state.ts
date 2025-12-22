@@ -1,5 +1,6 @@
 import { BuyCourseSaga } from './buy-course.saga';
 import { UserEntity } from '../entities/user.entity';
+import { PaymentStatus } from '@org/contracts';
 
 //шаблон для создания состояния саги
 export abstract class BuyCourseSagaState {
@@ -10,6 +11,6 @@ export abstract class BuyCourseSagaState {
   }
 
   public abstract pay():Promise<{paymentLink:string,user:UserEntity}>;
-  public abstract checkPayment():Promise<{user:UserEntity}>;
+  public abstract checkPayment():Promise<{user:UserEntity, status:PaymentStatus}>;
   public abstract cancel():Promise<{user:UserEntity}>;
 }

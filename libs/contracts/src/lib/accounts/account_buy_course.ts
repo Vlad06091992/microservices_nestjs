@@ -12,7 +12,7 @@ export namespace AccountByCourse {
     courseId:string
   }
   export class Response {
-    paymentUrl:string;
+    paymentLink:string;
   }
 }
 
