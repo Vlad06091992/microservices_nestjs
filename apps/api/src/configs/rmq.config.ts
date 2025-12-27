@@ -5,6 +5,8 @@ export const getRMQConfig = (): IRMQServiceAsyncOptions => {
   return {
     useFactory: (configService: ConfigService) => {
       return {
+        messagesTimeout:150000,
+        heartbeatIntervalInSeconds:150,
         exchangeName: configService.get('AMQP_EXCHANGE') ?? '',
         connections: [
           {
