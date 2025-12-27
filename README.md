@@ -26,6 +26,11 @@ To run the dev server for your app, use:
 npx nx serve accounts
 ```
 
+с указанием порта для дебага
+```sh
+nx serve accounts --port=9224 
+```
+
 To create a production bundle:
 
 ```sh
@@ -44,6 +49,11 @@ To run the dev server for your app, use:
 
 ```sh
 npx nx serve api
+```
+
+с указанием порта для дебага
+```sh
+nx serve api --port=9223 
 ```
 
 To create a production bundle:
