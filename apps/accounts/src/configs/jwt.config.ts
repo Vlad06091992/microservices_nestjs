@@ -6,7 +6,8 @@ export const getJWTConfig = (): JwtModuleAsyncOptions => {
     inject: [ConfigService],
     imports: [ConfigModule],
     useFactory: (configService: ConfigService) => {
-      const secret = configService.get('JWT_SECRET');
+      //TODO при запуске тестов некорректно обрабатываюься переменные, надо разбираться
+      const secret = configService.get('JWT_SECRET') || 'secret';
       return {
         global: true,
         secret,
