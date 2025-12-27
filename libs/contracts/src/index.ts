@@ -3,6 +3,7 @@ export * from './lib/accounts/account_register';
 export * from './lib/accounts/account_get_user_info';
 export * from './lib/accounts/account_get_courses_info';
 export * from './lib/accounts/account_update_profile';
+export * from './lib/accounts/account_changed_course';
 export * from './lib/courses/courses_get_courses';
 export * from './lib/payment/payment_generate_link';
 export * from './lib/payment/payment_check';
