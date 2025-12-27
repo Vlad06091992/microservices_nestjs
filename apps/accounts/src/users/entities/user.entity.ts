@@ -1,7 +1,13 @@
-import { IUser, IUserCourses, PurchaseState, UserRole } from '@org/interfaces';
+import {
+  IDomainEvent,
+  IUser,
+  IUserCourses,
+  PurchaseState,
+  UserRole,
+} from '@org/interfaces';
 import { compare, genSalt, hash } from 'bcrypt';
 import { Types } from 'mongoose';
-import { ObjectId } from 'mongodb';
+import { AccountChangedCourse } from '@org/contracts';
 
 // Entity — это конкретный экземпляр документа, который Model создаёт, находит и которым управляет.
 export class UserEntity implements IUser {
@@ -10,7 +16,8 @@ export class UserEntity implements IUser {
   displayName?: string;
   passwordHash: string;
   role: UserRole;
-  courses?: IUserCourses[];
+  courses?: IUserCourses[] = [];
+  events?: IDomainEvent[] = [];
 
   constructor(user: IUser) {
     this._id = user._id;
@@ -38,7 +45,7 @@ export class UserEntity implements IUser {
   }
 
 
-  public setCourseStaus(courseId: string, status: PurchaseState) {
+  public setCourseStaus(courseId: string, state: PurchaseState) {
 
     const isExistCourse = this.courses.find((course) => course.courseId === courseId);
     if (!isExistCourse) {
@@ -49,18 +56,22 @@ export class UserEntity implements IUser {
       return this;
     }
 
-    if (status === PurchaseState.Canceled) {
+    if (state === PurchaseState.Canceled) {
       this.courses = this.courses.filter((course) => course.courseId !== courseId);
       return this;
     }
 
     this.courses.map((c) => {
       if (c.courseId === courseId) {
-        c.purchaseState = status;
+        c.purchaseState = state;
       }
 
       return c;
     });
+
+    this.events.push({topic:AccountChangedCourse.topic,data:{userId:this._id.toString(), courseId:courseId,state}});
+
+    return this
   }
 
   public getUserCourses() {
